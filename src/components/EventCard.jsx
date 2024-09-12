@@ -65,14 +65,6 @@ export default function EventCard({ product }) {
 							onClick={() => setOpen(!open)}
 						/>
 					</div>
-					<div className=" transition-all hover:bg-orange-300 rounded-full p-1">
-						<AiOutlineShoppingCart
-							size={20}
-							className="cursor-pointer"
-							color="#333"
-							title="Add to cart"
-						/>
-					</div>
 				</div>
 			</div>
 			<div className="px-4 py-8 flex-1">

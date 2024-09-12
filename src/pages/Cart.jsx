@@ -12,9 +12,8 @@ export default function Cart() {
 	const dispatch = useDispatch();
 	const [finalPrice, setFinalPrice] = useState(0);
 	const { token } = useSelector((state) => state.user);
-	const { isDeleteSuccess, isAddedSuccess, isSuccess } = useSelector(
-		(state) => state.cart
-	);
+	const { isDeleteSuccess, isAddedSuccess, isSuccess, isUpdateSuccess } =
+		useSelector((state) => state.cart);
 	const { cart } = useSelector((state) => state.cart);
 
 	useEffect(() => {
@@ -23,56 +22,26 @@ export default function Cart() {
 	}, []);
 
 	useEffect(() => {
-		if (isDeleteSuccess || isAddedSuccess || isDeleteSuccess) {
+		if (
+			isDeleteSuccess ||
+			isAddedSuccess ||
+			isDeleteSuccess ||
+			isUpdateSuccess
+		) {
 			dispatch(getCart({ token }));
 			dispatch(resetCart());
 		}
-	}, [isDeleteSuccess, isAddedSuccess, isDeleteSuccess]);
+	}, [isDeleteSuccess, isAddedSuccess, isDeleteSuccess, isUpdateSuccess]);
 
 	useEffect(() => {
-		if (isSuccess || isAddedSuccess || isDeleteSuccess) {
+		if (isSuccess || isAddedSuccess || isDeleteSuccess || isUpdateSuccess) {
 			let result = 0;
 			for (let i = 0; i < cart?.length; i++) {
 				result += Number(cart?.[i]?.quantity) * Number(cart?.[i]?.price);
 				setFinalPrice(result);
 			}
 		}
-	}, [isSuccess, isAddedSuccess, isDeleteSuccess]);
-
-	const cartData = [
-		{
-			name: "Cleopatra Egyptian Collar Necklace Design Costume Accessories Halloween 1",
-			description:
-				"BEAUTIFUL AND HIGHLY DETAILED: This Cleopatra collar necklace is designed to bring the Egyptian goddess to life. It is a beautiful, highly detailed accessory that will have everyone mesmerized. You will surely be the center of attraction with this Cleopatra necklace on.",
-			price: 500,
-			size: "sm",
-			color: "red",
-		},
-		{
-			name: "Cleopatra Egyptian Collar Necklace Design Costume Accessories Halloween 2",
-			description:
-				"BEAUTIFUL AND HIGHLY DETAILED: This Cleopatra collar necklace is designed to bring the Egyptian goddess to life. It is a beautiful, highly detailed accessory that will have everyone mesmerized. You will surely be the center of attraction with this Cleopatra necklace on.",
-			price: 333,
-			size: "sm",
-			color: "red",
-		},
-		{
-			name: "Cleopatra Egyptian Collar Necklace Design Costume Accessories Halloween 3",
-			description:
-				"BEAUTIFUL AND HIGHLY DETAILED: This Cleopatra collar necklace is designed to bring the Egyptian goddess to life. It is a beautiful, highly detailed accessory that will have everyone mesmerized. You will surely be the center of attraction with this Cleopatra necklace on.",
-			price: 9990,
-			size: "sm",
-			color: "red",
-		},
-		{
-			name: "Cleopatra Egyptian Collar Necklace Design Costume Accessories Halloween 4",
-			description:
-				"BEAUTIFUL AND HIGHLY DETAILED: This Cleopatra collar necklace is designed to bring the Egyptian goddess to life. It is a beautiful, highly detailed accessory that will have everyone mesmerized. You will surely be the center of attraction with this Cleopatra necklace on.",
-			price: 10,
-			size: "sm",
-			color: "red",
-		},
-	];
+	}, [isSuccess, isAddedSuccess, isDeleteSuccess, isUpdateSuccess]);
 
 	return (
 		<>

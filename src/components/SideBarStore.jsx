@@ -4,23 +4,20 @@ import ShopByCategories from "./ShopByCategories";
 import { brandsApiCall } from "../redux/apiCalls/brands.ApiCall";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { colorsApiCall } from "../redux/apiCalls/colors.ApiCall";
 
 export default function SideBarStore({ searchParams, setSearchParams }) {
 	const dispatch = useDispatch();
 	useEffect(() => {
 		dispatch(brandsApiCall());
-		dispatch(colorsApiCall());
 	}, []);
 	const { brands } = useSelector((state) => state.brand);
-	const { colors } = useSelector((state) => state.color);
 	return (
-		<div className="flex-1 flex flex-col gap-4">
+		<div className="flex-1 md:flex flex-col gap-4 hidden">
 			<ShopByCategories
 				searchParams={searchParams}
 				setSearchParams={setSearchParams}
 			/>
-			<div className="shadow rounded-xl bg-white p-4 w-full ">
+			<div className="shadow rounded-xl bg-white p-4 w-full">
 				<div className=" bg-white p-4 w-full border-b border-gray-400 mb-6">
 					<h4 className="mb-4 font-semibold">Brands</h4>
 					<ul className="flex  gap-5 mb-4 flex-wrap">
@@ -43,37 +40,6 @@ export default function SideBarStore({ searchParams, setSearchParams }) {
 					</ul>
 				</div>
 				<div>
-					{/* <h5 className="font-medium mb-4">Availability</h5>
-					<ul className="flex flex-col gap-3 mb-4">
-						<li className="flex items-center gap-3 text-gray-500 ">
-							<input
-								type="checkbox"
-								name="instock"
-								id="instock"
-								className="w-5 h-5"
-							/>
-							<label
-								htmlFor="instock"
-								className="text-base hover:text-gray-600 cursor-pointer"
-							>
-								in stock (21)
-							</label>
-						</li>
-						<li className="flex items-center gap-3 text-gray-500 ">
-							<input
-								type="checkbox"
-								name="outofstock"
-								id="outofstock"
-								className="w-5 h-5"
-							/>
-							<label
-								htmlFor="outofstock"
-								className="text-base hover:text-gray-600 cursor-pointer"
-							>
-								Out of stock (1)
-							</label>
-						</li>
-					</ul> */}
 					<div className="w-full my-8">
 						<h5 className="font-medium mb-4">Price</h5>
 						<div className="flex gap-2 ">
@@ -95,26 +61,7 @@ export default function SideBarStore({ searchParams, setSearchParams }) {
 							</div>
 						</div>
 					</div>
-					<div className="w-full my-8">
-						<h5 className="font-medium mb-4">Colors:</h5>
-						<ul className="flex gap-2 flex-wrap p-2 ">
-							{colors?.map((item, index) => {
-								return (
-									<li
-										key={index}
-										className={`w-7 h-7  rounded-full cursor-pointer opacity-90  hover:opacity-100`}
-										style={{ backgroundColor: `${item.title}` }}
-										onClick={() =>
-											setSearchParams({
-												color: item.title,
-												limit: 20,
-											})
-										}
-									></li>
-								);
-							})}
-						</ul>
-					</div>
+
 					{/* <div className="w-full my-8">
 						<h5 className="font-medium mb-4">Size</h5>
 						<ul className="flex flex-col gap-3 ">
@@ -192,35 +139,7 @@ export default function SideBarStore({ searchParams, setSearchParams }) {
 					</div> */}
 				</div>
 			</div>
-			<div className="rounded-xl bg-white p-4 w-full">
-				<h4 className="mb-8 text-lg font-semibold">Product Tag</h4>
-				<ul className="flex  gap-5 mb-4 flex-wrap">
-					<Link className="p-2 bg-gray-200 rounded-md text-gray-500 hover:text-gray-800 capitalize text-sm">
-						headphones
-					</Link>
-					<Link className="p-2 bg-gray-200 rounded-md text-gray-500 hover:text-gray-800 capitalize text-sm">
-						laptop
-					</Link>
-					<Link className="p-2 bg-gray-200 rounded-md text-gray-500 hover:text-gray-800 capitalize text-sm">
-						mobile
-					</Link>
-					<Link className="p-2 bg-gray-200 rounded-md text-gray-500 hover:text-gray-800 capitalize text-sm">
-						oppo
-					</Link>
-					<Link className="p-2 bg-gray-200 rounded-md text-gray-500 hover:text-gray-800 capitalize text-sm">
-						speaker
-					</Link>
-					<Link className="p-2 bg-gray-200 rounded-md text-gray-500 hover:text-gray-800 capitalize text-sm">
-						tablet
-					</Link>
-					<Link className="p-2 bg-gray-200 rounded-md text-gray-500 hover:text-gray-800 capitalize text-sm">
-						vivo
-					</Link>
-					<Link className="p-2 bg-gray-200 rounded-md text-gray-500 hover:text-gray-800 capitalize text-sm">
-						wire
-					</Link>
-				</ul>
-			</div>
+
 			<div className="rounded-xl bg-white p-4 w-full">
 				<h4 className="mb-8 text-lg font-semibold">Random Products</h4>
 				<ul className="flex  gap-5 mb-4 flex-wrap divide-y">

@@ -54,7 +54,7 @@ export default function Checkout() {
 
 	const submitHandler = async () => {
 		if (coupon === "") {
-			toast.error("Write your coupon?!");
+			toast.error("Write your coupon !");
 			return false;
 		}
 		try {

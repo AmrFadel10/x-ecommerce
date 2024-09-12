@@ -12,9 +12,13 @@ const HomeLayout = () => {
 						className="object-cover"
 					/>
 					<div className="absolute top-0  py-16 px-12 z-10 text-black">
-						<p className="text-[#bf4800]">SUPERCHARGED FOR PROS</p>
-						<h1 className="font-semibold text-5xl my-8">IPad S13+ Pro.</h1>
-						<p className="w-[60%] text-base text-gray-700">
+						<p className="text-[#bf4800] text-sm md:text-base">
+							SUPERCHARGED FOR PROS
+						</p>
+						<h1 className="font-semibold md:text-5xl text-xl my-8">
+							IPad S13+ Pro.
+						</h1>
+						<p className="w-[60%] text-sm md:text-base text-gray-700">
 							From $999.00 or $41.62/mo. for 24 mo. Footnote*
 						</p>
 						<Link

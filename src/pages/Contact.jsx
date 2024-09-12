@@ -64,8 +64,8 @@ export default function Contact() {
 					referrerPolicy="no-referrer-when-downgrade"
 					title="done"
 				></iframe>
-				<div className="flex gap-16 bg-white rounded-xl shadow-md p-6">
-					<div className="flex-1 flex flex-col gap-8">
+				<div className="flex gap-16 bg-white rounded-xl shadow-md p-6 flex-col md:flex-row">
+					<div className="flex-1 flex flex-col gap-8 order-2 md:order-1">
 						<h2 className="text-3xl font-medium">Conatct</h2>
 						<form className="flex flex-col gap-4" onSubmit={handleSubmit}>
 							<div className="w-full">
@@ -141,7 +141,7 @@ export default function Contact() {
 							</button>
 						</form>
 					</div>
-					<div className="flex-1 flex flex-col gap-8">
+					<div className="flex-1 flex flex-col gap-8 order-1 md:order-2">
 						<h2 className="text-3xl font-medium">Get In Touch With Us</h2>
 						<p className="flex gap-3 text-gray-600 content-center font-light">
 							<FaHome className="text-lg" />

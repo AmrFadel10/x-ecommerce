@@ -37,10 +37,6 @@ const ProfileSideBar = ({ setActive, active }) => {
 			Icon: PiAddressBook,
 			name: "Address",
 		},
-		{
-			Icon: AiOutlineLogout,
-			name: "Logout",
-		},
 	];
 	return (
 		<div className="flex-1 bg-white rounded-xl px-4 py-8 flex-col gap-y-8 flex shadow">

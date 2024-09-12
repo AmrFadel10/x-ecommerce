@@ -15,16 +15,13 @@ import {
 } from "@stripe/react-stripe-js";
 
 export default function Payment() {
-	const dispatch = useDispatch();
 	const navigate = useNavigate();
 	const elements = useElements();
 	const stripe = useStripe();
 	const [orderInfo, setOrderInfo] = useState({});
 
 	const { token, user } = useSelector((state) => state.user);
-	const { isDeleteSuccess, isAddedSuccess, isSuccess, cart } = useSelector(
-		(state) => state.cart
-	);
+	const { cart } = useSelector((state) => state.cart);
 	//Shipping info
 	const [shippingInfo, setShippingInfo] = useState({
 		firstname: user?.name || "",

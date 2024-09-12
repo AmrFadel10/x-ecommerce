@@ -22,7 +22,7 @@ import Cart from "./pages/Cart";
 import Checkout from "./pages/Checkout";
 import Login from "./pages/Login";
 import { Toaster } from "react-hot-toast";
-import EventsPage from "./pages/EventsPage";
+// import EventsPage from "./pages/EventsPage";
 import FAQ from "./pages/FAQ";
 import Profile from "./pages/Profile";
 import SingleBlog from "./pages/SingleBlog";
@@ -102,7 +102,7 @@ function App() {
 								)
 							}
 						/>
-						<Route path="/events" element={<EventsPage />} />
+						{/* <Route path="/events" element={<EventsPage />} /> */}
 						<Route path="/reset-password/:token" element={<ResetPassword />} />
 						<Route path="/terms-condition" element={<TermsAndConditions />} />
 						<Route path="/privacy-policy" element={<PrivacyPolicy />} />

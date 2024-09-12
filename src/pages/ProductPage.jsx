@@ -79,7 +79,7 @@ export default function ProductPage() {
 			{/* <Meta title={"Product"} />
 			<BreadCrumb title={"Product"} /> */}
 			<section className="container mx-auto mb-36">
-				<div className="   flex  my-8 gap-x-8">
+				<div className="   flex  my-8 gap-x-8 flex-col md:flex-row ">
 					<div className="flex-1 flex flex-col gap-4 bg-white p-8 shadow-md rounded-xl">
 						<div className=" h-[600px] w-full">
 							<img
@@ -96,7 +96,7 @@ export default function ProductPage() {
 										: product?.images?.[0]?.url
 								}
 								alt="img"
-								className="flex-1 object-contain border w-full h-full"
+								className="flex-1 object-contain border w-1/2 h-full"
 							/>
 							<img
 								src={
@@ -105,13 +105,13 @@ export default function ProductPage() {
 										: product?.images?.[0]?.url
 								}
 								alt="img"
-								className="flex-1 object-contain border w-full h-full"
+								className="flex-1 object-contain border w-1/2 h-full"
 							/>
 						</div>
 					</div>
 					<div className="flex-1 flex-col bg-white p-8 shadow-md rounded-xl">
-						<h2 className="font-semibold  pb-2 text-slate-800 text-xl">
-							Apple MacBook Air Laptop: M1 chip, 13.3-inch/33.74 cm
+						<h2 className="font-semibold  pb-2 text-slate-800 md:text-xl text-md">
+							{product?.title}
 						</h2>
 						<div className="flex gap-3 flex-col border-y pt-2 pb-4">
 							<span className="font-semibold text-base">${product?.price}</span>
@@ -248,22 +248,9 @@ export default function ProductPage() {
 								>
 									{user && !alreadyAddedToCart ? "Add to cart" : "Go to cart"}
 								</button>
-								<button className="bg-orange-300 text-slate-800 hover:bg-slate-800 hover:text-slate-200 px-8 py-3  rounded-full w-fit transition-all">
-									Buy it now
-								</button>
 							</div>
 						</div>
 
-						<div className="flex  gap-16 my-4">
-							<button className="flex items-center gap-1 text-sm">
-								<PiHeartStraightLight className="text-xl" />
-								Add to wishlist
-							</button>
-							<button className="flex items-center gap-1 text-sm">
-								<IoIosShuffle className="text-xl" />
-								Add to compare
-							</button>
-						</div>
 						<div>
 							<div className="mt-6">
 								<div className="py-3 border-b">

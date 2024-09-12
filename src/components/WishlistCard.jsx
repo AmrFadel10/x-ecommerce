@@ -12,7 +12,10 @@ export default function WishlistCard({ item }) {
 		dispatch(addWishlistApiCall({ id: item._id.toString(), token }));
 	};
 	return (
-		<div className="group flex flex-col relative bg-white rounded-xl overflow-hidden">
+		<Link
+			className="group flex flex-col relative bg-white rounded-xl overflow-hidden"
+			to={"/product/" + item._id}
+		>
 			<span className="absolute top-3 right-3  hover:text-black text-gray-800 cursor-pointer rounded-sm">
 				<RxCross1 size={28} onClick={addToWishList} />
 			</span>
@@ -34,6 +37,6 @@ export default function WishlistCard({ item }) {
 					</div>
 				</div>
 			</div>
-		</div>
+		</Link>
 	);
 }

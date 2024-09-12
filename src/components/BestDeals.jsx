@@ -5,8 +5,11 @@ import { useSelector } from "react-redux";
 const BestDeals = ({ where }) => {
 	const { products, success } = useSelector((state) => state.products);
 	const [productsState, setProductsState] = useState([]);
-	const { wishlist } = useSelector((state) => state.userContains);
+	const { wishlist, compareProducts } = useSelector(
+		(state) => state.userContains
+	);
 	const wishlistId = wishlist?.wishlist?.map((item) => item._id);
+	const compareIds = compareProducts?.compareProducts?.map((item) => item._id);
 
 	useEffect(() => {
 		if (success && products) {
@@ -16,6 +19,7 @@ const BestDeals = ({ where }) => {
 			setProductsState(topProducts);
 		}
 	}, [products, success]);
+
 	return (
 		<div className="my-24">
 			<h3 className="text-2xl font-semibold ">
@@ -25,7 +29,11 @@ const BestDeals = ({ where }) => {
 				{productsState?.map((product, index) => {
 					return (
 						<div key={index}>
-							<FeatureCard product={product} wishlistId={wishlistId} />
+							<FeatureCard
+								product={product}
+								wishlistId={wishlistId}
+								compareIds={compareIds}
+							/>
 						</div>
 					);
 				})}

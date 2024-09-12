@@ -9,7 +9,10 @@ import FeatureCard from "../components/FeatureCard";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getProducts } from "../redux/apiCalls/Products.ApiCall";
-import { getWishlistApiCall } from "../redux/apiCalls/UserContains.ApiCall";
+import {
+	getCompareProductsApiCall,
+	getWishlistApiCall,
+} from "../redux/apiCalls/UserContains.ApiCall";
 import { resetwishlist } from "../redux/slices/UserContains.Slice";
 import { useSearchParams } from "react-router-dom";
 
@@ -20,27 +23,34 @@ export default function OurStore() {
 	const { products } = useSelector((state) => state.products);
 
 	//selctors
-	const { wishlist, isAddWishlistSuccess } = useSelector(
-		(state) => state.userContains
-	);
+	const {
+		wishlist,
+		isAddWishlistSuccess,
+		isAddCompareSuccess,
+		compareProducts,
+	} = useSelector((state) => state.userContains);
 	const { token, user } = useSelector((state) => state.user);
 	//
 	useEffect(() => {
 		if (user) {
-			if (isAddWishlistSuccess) {
+			if (isAddWishlistSuccess || isAddCompareSuccess) {
 				dispatch(getWishlistApiCall({ token }));
+				dispatch(getCompareProductsApiCall({ token }));
+
 				dispatch(resetwishlist());
 			}
 		}
-	}, [isAddWishlistSuccess, user]);
+	}, [isAddWishlistSuccess, user, isAddCompareSuccess]);
 
 	useEffect(() => {
 		dispatch(getProducts(searchParams));
 		if (user) {
 			dispatch(getWishlistApiCall({ token }));
+			dispatch(getCompareProductsApiCall({ token }));
 		}
 	}, [user, searchParams]);
 	const wishlistId = wishlist?.wishlist?.map((item) => item._id);
+	const compareIds = compareProducts?.compareProducts?.map((item) => item._id);
 
 	return (
 		<>
@@ -58,7 +68,7 @@ export default function OurStore() {
 								<p>Sort By:</p>
 								<select
 									name="sort_by"
-									className="bg-gray-50 p-3 rounded-lg focus:outline-none text-gray-400"
+									className="bg-gray-50 md:p-3 p-1 rounded-lg focus:outline-none text-gray-400"
 									id="SortBy"
 									onChange={(e) => {
 										const { value } = e.target;
@@ -94,8 +104,7 @@ export default function OurStore() {
 								</select>
 							</div>
 							<div className="flex items-center gap-3">
-								<p className="text-gray-400 text-sm">21 products</p>
-								<div className="flex gap-2 items-center">
+								<div className="md:flex gap-2 items-center hidden">
 									<div
 										className=" text-xl p-2 rounded-md bg-gray-100 cursor-pointer font-bold"
 										onClick={() => setGrid(4)}
@@ -124,7 +133,9 @@ export default function OurStore() {
 							</div>
 						</div>
 						{products?.length >= 1 ? (
-							<div className={`grid grid-cols-${grid} gap-6 py-6`}>
+							<div
+								className={`grid md:grid-cols-${grid} gap-6 py-6 grid-cols-1`}
+							>
 								{products.map((product, index) => {
 									return (
 										<div key={index}>
@@ -132,6 +143,7 @@ export default function OurStore() {
 												product={product}
 												grid={grid}
 												wishlistId={wishlistId}
+												compareIds={compareIds}
 											/>
 										</div>
 									);

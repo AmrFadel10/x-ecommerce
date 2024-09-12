@@ -1,27 +1,31 @@
 import Categories from "../components/Categories";
 import BestDeals from "../components/BestDeals";
-import Events from "../components/Events";
 import HomeBlogs from "../components/HomeBlogs";
 import HomeLayout from "../components/HomeLayout";
-import SomeProducts from "../components/SomeProducts";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import Sponsored from "../components/Sponsored";
 import { useDispatch, useSelector } from "react-redux";
-import { getWishlistApiCall } from "../redux/apiCalls/UserContains.ApiCall";
+import {
+	getCompareProductsApiCall,
+	getWishlistApiCall,
+} from "../redux/apiCalls/UserContains.ApiCall";
 import { resetwishlist } from "../redux/slices/UserContains.Slice";
 import { getProducts } from "../redux/apiCalls/Products.ApiCall";
 import { getBlogs } from "../redux/apiCalls/blogs.ApiCall";
 
 export default function Home() {
 	const dispatch = useDispatch();
-	const { isAddWishlistSuccess } = useSelector((state) => state.userContains);
+	const { isAddWishlistSuccess, isAddCompareSuccess } = useSelector(
+		(state) => state.userContains
+	);
 	const { user, token } = useSelector((state) => state.user);
 	useEffect(() => {
-		if (isAddWishlistSuccess && user) {
+		if ((isAddWishlistSuccess && user) || (isAddCompareSuccess && user)) {
 			dispatch(getWishlistApiCall({ token }));
+			dispatch(getCompareProductsApiCall({ token }));
 			dispatch(resetwishlist());
 		}
-	}, [isAddWishlistSuccess, user]);
+	}, [isAddWishlistSuccess, user, isAddCompareSuccess]);
 
 	useEffect(() => {
 		scrollTo(0, 0);
@@ -33,6 +37,7 @@ export default function Home() {
 		dispatch(getProducts("limit=5&sort=-sold"));
 		if (user) {
 			dispatch(getWishlistApiCall({ token }));
+			dispatch(getCompareProductsApiCall({ token }));
 		}
 	}, [user]);
 
@@ -44,7 +49,7 @@ export default function Home() {
 			<BestDeals where={"Home"} />
 			{/* <SomeProducts /> */}
 			{/* Special products */}
-			<Events />
+			{/* <Events /> */}
 			{/* blogs */}
 			<HomeBlogs />
 			<Sponsored />
