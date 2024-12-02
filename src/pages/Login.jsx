@@ -36,6 +36,9 @@ const Login = () => {
   const onSubmit = (data) => {
     dispatch(loginUser(data));
   };
+  useEffect(() => {
+    scrollTo(0, 0);
+  }, []);
   return (
     <>
       {/* <Meta title={"Signin"} />

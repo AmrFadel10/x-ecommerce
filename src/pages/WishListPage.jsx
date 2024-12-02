@@ -7,33 +7,34 @@ import { resetwishlist } from "../redux/slices/UserContains.Slice";
 import { useEffect } from "react";
 
 export default function WishListPage() {
-	const dispatch = useDispatch();
-	const { wishlist, isAddWishlistSuccess } = useSelector(
-		(state) => state.userContains
-	);
-	const { token, user } = useSelector((state) => state.user);
-	useEffect(() => {
-		if (user) {
-			if (isAddWishlistSuccess) {
-				dispatch(getWishlistApiCall({ token }));
-				dispatch(resetwishlist());
-			}
-		}
-	}, [isAddWishlistSuccess]);
+  const dispatch = useDispatch();
+  const { wishlist, isAddWishlistSuccess } = useSelector(
+    (state) => state.userContains
+  );
+  const { token, user } = useSelector((state) => state.user);
+  useEffect(() => {
+    if (user) {
+      if (isAddWishlistSuccess) {
+        dispatch(getWishlistApiCall({ token }));
+        dispatch(resetwishlist());
+      }
+    }
+  }, [isAddWishlistSuccess]);
 
-	useEffect(() => {
-		if (user) {
-			dispatch(getWishlistApiCall({ token }));
-		}
-	}, []);
+  useEffect(() => {
+    if (user) {
+      dispatch(getWishlistApiCall({ token }));
+    }
+    scrollTo(0, 0);
+  }, []);
 
-	return (
-		<>
-			{/* <Meta title={"Wishlist"} />
+  return (
+    <>
+      {/* <Meta title={"Wishlist"} />
 			<BreadCrumb title={"wishlist"} /> */}
-			<section className="container mx-auto ">
-				<WishListCards wishlist={wishlist?.wishlist} />
-			</section>
-		</>
-	);
+      <section className="container mx-auto ">
+        <WishListCards wishlist={wishlist?.wishlist} />
+      </section>
+    </>
+  );
 }

@@ -5,42 +5,46 @@ import { brandsApiCall } from "../redux/apiCalls/brands.ApiCall";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 
-export default function SideBarStore({ searchParams, setSearchParams }) {
-	const dispatch = useDispatch();
-	useEffect(() => {
-		dispatch(brandsApiCall());
-	}, []);
-	const { brands } = useSelector((state) => state.brand);
-	return (
-		<div className="flex-1 md:flex flex-col gap-4 hidden">
-			<ShopByCategories
-				searchParams={searchParams}
-				setSearchParams={setSearchParams}
-			/>
-			<div className="shadow rounded-xl bg-white p-4 w-full">
-				<div className=" bg-white p-4 w-full border-b border-gray-400 mb-6">
-					<h4 className="mb-4 font-semibold">Brands</h4>
-					<ul className="flex  gap-5 mb-4 flex-wrap">
-						{brands?.map((item, index) => {
-							return (
-								<li
-									className="p-2 bg-gray-200 rounded-md text-gray-500 hover:text-gray-800 capitalize text-sm cursor-pointer"
-									onClick={() =>
-										setSearchParams({
-											brand: item.title,
-											limit: 20,
-										})
-									}
-									key={index}
-								>
-									{item.title}
-								</li>
-							);
-						})}
-					</ul>
-				</div>
-				<div>
-					<div className="w-full my-8">
+export default function SideBarStore({
+  searchParams,
+  setSearchParams,
+  products,
+}) {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(brandsApiCall());
+  }, []);
+  const { brands } = useSelector((state) => state.brand);
+  return (
+    <div className="flex-1 md:flex flex-col gap-4 hidden">
+      <ShopByCategories
+        searchParams={searchParams}
+        setSearchParams={setSearchParams}
+      />
+      <div className="shadow rounded-xl bg-white p-4 w-full">
+        <div className=" bg-white p-4 w-full">
+          <h4 className="mb-4 font-semibold">Brands</h4>
+          <ul className="flex  gap-5 mb-4 flex-wrap">
+            {brands?.map((item, index) => {
+              return (
+                <li
+                  className="p-2 bg-gray-200 rounded-md text-gray-500 hover:text-gray-800 capitalize text-sm cursor-pointer"
+                  onClick={() =>
+                    setSearchParams({
+                      brand: item.title,
+                      limit: 20,
+                    })
+                  }
+                  key={index}
+                >
+                  {item.title}
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+        <div>
+          {/* <div className="w-full my-8">
 						<h5 className="font-medium mb-4">Price</h5>
 						<div className="flex gap-2 ">
 							<div className="flex gap-2 items-center">
@@ -60,9 +64,9 @@ export default function SideBarStore({ searchParams, setSearchParams }) {
 								/>
 							</div>
 						</div>
-					</div>
+					</div> */}
 
-					{/* <div className="w-full my-8">
+          {/* <div className="w-full my-8">
 						<h5 className="font-medium mb-4">Size</h5>
 						<ul className="flex flex-col gap-3 ">
 							<li className="flex items-center gap-3 text-gray-500 ">
@@ -137,38 +141,31 @@ export default function SideBarStore({ searchParams, setSearchParams }) {
 							</li>
 						</ul>
 					</div> */}
-				</div>
-			</div>
+        </div>
+      </div>
 
-			<div className="rounded-xl bg-white p-4 w-full">
-				<h4 className="mb-8 text-lg font-semibold">Random Products</h4>
-				<ul className="flex  gap-5 mb-4 flex-wrap divide-y">
-					<li className="flex items-center p-4 ">
-						<Link to={"#"}>
-							<img src="assets/images/24_150x.avif" alt="img" />
-						</Link>
-						<div>
-							<p className="font-semibold line-clamp-2">
-								Kids headphones bulk 10 pack multi colored for students
-							</p>
-							<ReactStars count={5} size={24} value={3} activeColor="#ffd700" />
-							<span className="font-semibold">$100.00</span>
-						</div>
-					</li>
-					<li className="flex items-center p-4 ">
-						<Link to={"#"}>
-							<img src="assets/images/22_150x.avif" alt="img" />
-						</Link>
-						<div>
-							<p className="font-semibold line-clamp-2">
-								APPLE Watch Series 2 – 42 mm Stainless Steel Case
-							</p>
-							<ReactStars count={5} size={24} value={3} activeColor="#ffd700" />
-							<span className="font-semibold">$100.00</span>
-						</div>
-					</li>
-				</ul>
-			</div>
-		</div>
-	);
+      <div className="rounded-xl bg-white p-4 w-full">
+        <h4 className="mb-8 text-lg font-semibold">Random Products</h4>
+        <ul className="flex  gap-2 mb-4 flex-wrap divide-y">
+          {products?.slice(0, 3).map((product, index) => {
+            return (
+              <li className="flex items-center p-4 gap-3" key={index}>
+                <Link to={product._id}>
+                  <img src={product?.images?.[0]?.url} alt="img" />
+                </Link>
+                <div>
+                  <p
+                    className="font-semibold line-clamp-2"
+                    dangerouslySetInnerHTML={{ __html: product.description }}
+                  ></p>
+                  {/* <ReactStars count={5} size={24} value={3} activeColor="#ffd700" /> */}
+                  <span className="font-semibold">{product.price}$</span>
+                </div>
+              </li>
+            );
+          })}
+        </ul>
+      </div>
+    </div>
+  );
 }

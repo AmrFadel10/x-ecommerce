@@ -7,32 +7,34 @@ import { getCompareProductsApiCall } from "../redux/apiCalls/UserContains.ApiCal
 import { resetwishlist } from "../redux/slices/UserContains.Slice";
 
 export default function CompareProducts() {
-	const dispatch = useDispatch();
-	const { isAddCompareSuccess, compareProducts } = useSelector(
-		(state) => state.userContains
-	);
-	const { user, token } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+  const { isAddCompareSuccess, compareProducts } = useSelector(
+    (state) => state.userContains
+  );
+  const { user, token } = useSelector((state) => state.user);
+  useEffect(() => {
+    scrollTo(0, 0);
+  }, []);
+  useEffect(() => {
+    if (user) {
+      dispatch(getCompareProductsApiCall({ token }));
+      dispatch(resetwishlist());
+    }
+  }, [isAddCompareSuccess]);
 
-	useEffect(() => {
-		if (user) {
-			dispatch(getCompareProductsApiCall({ token }));
-			dispatch(resetwishlist());
-		}
-	}, [isAddCompareSuccess]);
-
-	useEffect(() => {
-		if (user) {
-			dispatch(getCompareProductsApiCall({ token }));
-		}
-	}, [user]);
-	const compareIds = compareProducts?.compareProducts;
-	return (
-		<>
-			{/* <Meta title={"Compare products"} />
+  useEffect(() => {
+    if (user) {
+      dispatch(getCompareProductsApiCall({ token }));
+    }
+  }, [user]);
+  const compareIds = compareProducts?.compareProducts;
+  return (
+    <>
+      {/* <Meta title={"Compare products"} />
 			<BreadCrumb title={"Compare"} /> */}
-			<section className="container mx-auto ">
-				<CompareList CompareProducts={compareIds} />
-			</section>
-		</>
-	);
+      <section className="container mx-auto ">
+        <CompareList CompareProducts={compareIds} />
+      </section>
+    </>
+  );
 }
