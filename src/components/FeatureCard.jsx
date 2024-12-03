@@ -25,6 +25,9 @@ export default function FeatureCard({ grid, product, wishlistId, compareIds }) {
     dispatch(addWishlistApiCall({ id: product._id.toString(), token }));
   };
   const addToCompareProducts = () => {
+    if (!user) {
+      navigate("/login");
+    }
     dispatch(addCompareProductsApiCall({ id: product._id.toString(), token }));
   };
   return (

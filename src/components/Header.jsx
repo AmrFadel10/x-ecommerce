@@ -124,7 +124,7 @@ export default function Header() {
               </div>
               <div className="flex lg:gap-4 md:gap-2 gap-1 order-2 lg:order-3 ">
                 <Link
-                  to="/compare"
+                  to={user ? "/compare" : "/login"}
                   className="flex items-center md:gap-2 gap-1 hover:text-slate-50"
                 >
                   <SlRefresh size={25} />
