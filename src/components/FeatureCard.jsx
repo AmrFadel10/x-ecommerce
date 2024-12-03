@@ -1,15 +1,10 @@
 import ReactStars from "react-rating-stars-component";
 import { IoIosShuffle } from "react-icons/io";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { FaCheck } from "react-icons/fa6";
 
-import {
-  AiFillHeart,
-  AiOutlineEye,
-  AiOutlineHeart,
-  AiOutlineShoppingCart,
-} from "react-icons/ai";
+import { AiFillHeart, AiOutlineEye, AiOutlineHeart } from "react-icons/ai";
 import FeatureDetailsCard from "./FeatureDetailscard";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -19,10 +14,14 @@ import {
 
 export default function FeatureCard({ grid, product, wishlistId, compareIds }) {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [open, setOpen] = useState(false);
 
-  const { token } = useSelector((state) => state.user);
+  const { token, user } = useSelector((state) => state.user);
   const addToWishList = () => {
+    if (!user) {
+      navigate("/login");
+    }
     dispatch(addWishlistApiCall({ id: product._id.toString(), token }));
   };
   const addToCompareProducts = () => {
