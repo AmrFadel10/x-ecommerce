@@ -20,7 +20,7 @@ const SingleBlog = () => {
     <>
       {/* <Meta title="Dynamic Blog Name" />
             <BreadCrumb title="Dynamic Blog Name" /> */}
-      <section className="container py-8 mx-auto">
+      <section className="container py-8 mx-auto bg-zinc-50">
         <div className=" mx-auto w-full">
           <Link
             to="/blogs"
@@ -31,11 +31,11 @@ const SingleBlog = () => {
           <h3 className="font-semibold text-2xl mb-16"> {ablog?.title}</h3>
           <img
             src={ablog?.image?.url}
-            className="object-cover  my-4 h-[600px] mx-auto"
+            className="object-cover  my-4 max-h-[500px] mx-auto"
             alt="ablog"
           />
           <div
-            className="text-gray-400 text-lg"
+            className="text-gray-800  leading-10 md:px-8 px-3 mt-16"
             dangerouslySetInnerHTML={{ __html: ablog?.description }}
           ></div>
         </div>

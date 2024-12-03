@@ -12,7 +12,7 @@ export default function Layout() {
       {isLoading ? (
         <div className="text-4xl">Loading...</div>
       ) : (
-        <main className="min-h-screen bg-gray-100">
+        <main className="min-h-screen bg-zinc-50">
           <Header />
           <section className="container mx-auto px-2">
             <Outlet />

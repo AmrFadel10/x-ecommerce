@@ -147,7 +147,7 @@ export default function ProductPage() {
                 to={"#"}
                 className="text-sm  text-gray-500 hover:text-gray-900"
               >
-                Mora
+                {product?.brand}
               </Link>
             </div>
             <div className="flex gap-3 mt-4 items-center">
@@ -156,7 +156,7 @@ export default function ProductPage() {
                 to={"#"}
                 className="text-sm  text-gray-500 hover:text-gray-900"
               >
-                Pet supplies
+                {product?.category}
               </Link>
             </div>
             <div className="flex gap-3 mt-4 items-center">
