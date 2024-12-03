@@ -132,6 +132,10 @@ const Login = () => {
               </Link>
             </div>
           </form>
+          <div className="flex gap-2 flex-col">
+            <div>Email : demo@email.com</div>
+            <div>password : 123456789</div>
+          </div>
         </div>
       </div>
     </>

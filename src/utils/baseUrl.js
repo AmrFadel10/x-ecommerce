@@ -1,5 +1,5 @@
 import axios from "axios";
 const request = axios.create({
-  baseURL: "http://localhost:8000/api/v2",
+  baseURL: "https://backend-ecommerce-ashy.vercel.app/api/v2",
 });
 export default request;
